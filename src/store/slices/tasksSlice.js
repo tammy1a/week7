@@ -35,6 +35,9 @@ const tasksSlice = createSlice({
     deleteAllTasks(state) {
       state.tasks = [];
     },
+    setState(state,action){
+        state.status = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -52,7 +55,7 @@ const tasksSlice = createSlice({
   },
 });
 
-export const { addTasks, updateTask, deleteTask, deleteAllTasks } =
+export const { addTasks, updateTask, deleteTask, deleteAllTasks,setState } =
   tasksSlice.actions;
 
 export default tasksSlice.reducer;

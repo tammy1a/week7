@@ -9,6 +9,8 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import users from "../assets/users.json";
 import { Alert } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setState } from "../store/slices/tasksSlice";
 function Copyright(props) {
   return (
     <Typography
@@ -34,6 +36,7 @@ export default function LogIn() {
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [credentialError, setCredentialError] = useState(false);
+  const dispatch = useDispatch();
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
     if (e.target.validity.valid) {
@@ -55,6 +58,7 @@ export default function LogIn() {
     setCredentialError(!found);
     if (found) {
       localStorage.setItem("LoggedIn", true);
+      dispatch(setState("idle"));
       localStorage.setItem("CurrentUser", email.split("@")[0]);
       window.location.href = "./profile";
     }

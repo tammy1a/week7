@@ -20,17 +20,24 @@ const InputTask = () => {
         }
       );
 
+
       console.log(response.data);
+      return true;
     } catch (error) {
       console.error("Error:", error);
+      return false;
     }
   }
   const addTask = () => {
     if (input != "") {
-      postTask({ user_id: 1, title: input, completed: false });
-
+      const done = postTask({ user_id: 1, title: input, completed: false });
+      if (done){
       dispatch(addTasks({ user_id: input, title: input, completed: false }));
       setInput("");
+    }
+      else{
+        alert("Task Add Failed....")
+      }
     }
   };
   return (
